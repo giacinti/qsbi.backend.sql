@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
-import config
+import qsbi.backend.sql.config as config
 
 engine = create_async_engine(
     config.settings.QSBI_DB_URL_ASYNC,
