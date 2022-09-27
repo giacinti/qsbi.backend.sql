@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "qsbi-backend-sql"
+version = "0.1.0"
+description = "sqlalchemy backend for qsbi"
+authors = ["giacinti <philippe@giacinti.com>"]
+readme = "README.md"
+packages = [{include = "qsbi"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+SQLAlchemy = {extras = ["asyncio"], version = "^1.4.41"}
+alembic = "^1.8.1"
+pydantic = "^1.10.2"
+aiosqlite = "^0.17.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.1.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
