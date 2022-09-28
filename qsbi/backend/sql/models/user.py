@@ -9,6 +9,8 @@ class User(Base):
     login = Column(Text)
     firstname = Column(Text)
     lastname = Column(Text)
+    password = Column(Text)
+    active = Column(Integer)
     notes = Column(Text)
 
     logs = relationship("AuditLog", back_populates="user")
