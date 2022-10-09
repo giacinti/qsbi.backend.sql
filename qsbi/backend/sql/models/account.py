@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 from .base import Base
 
-class Account(Base):
+class Account(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     name = Column(Text)
     bank_id = Column(Integer, ForeignKey("bank.id"))

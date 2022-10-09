@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 from .base import Base
 
 
-class Currency(Base):
+class Currency(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     name = Column(Text)
     nickname = Column(Text)

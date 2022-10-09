@@ -1,4 +1,5 @@
 from logging.config import fileConfig
+from typing import Any, Dict, Mapping, Optional
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
@@ -22,9 +23,9 @@ import qsbi.backend.sql.models.base as qbase
 import qsbi.backend.sql.models
 import qsbi.backend.sql.config as qconfig
 
-target_metadata = qbase.Base.metadata
+target_metadata = qbase.Base.metadata  # type: ignore
 
-def get_url():
+def get_url() -> str:
     return qconfig.settings.QSBI_DB_URL
 
 # other values from the config, defined by the needs of env.py,
@@ -46,7 +47,7 @@ def run_migrations_offline() -> None:
 
     """
     #url = config.get_main_option("sqlalchemy.url")
-    url = get_url()
+    url: str = get_url()
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -65,22 +66,23 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    configuration = config.get_section(config.config_ini_section)
-    configuration["sqlalchemy.url"] = get_url()
-    connectable = engine_from_config(
-        #config.get_section(config.config_ini_section),
-        configuration,
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
-
-    with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
+    configuration: Optional[Mapping[str, Any]] = config.get_section(config.config_ini_section)
+    if configuration:
+        configuration["sqlalchemy.url"] = get_url()
+        connectable = engine_from_config(
+            #config.get_section(config.config_ini_section),
+            configuration,
+            prefix="sqlalchemy.",
+            poolclass=pool.NullPool,
         )
 
-        with context.begin_transaction():
-            context.run_migrations()
+        with connectable.connect() as connection:
+            context.configure(
+                connection=connection, target_metadata=target_metadata
+            )
+
+            with context.begin_transaction():
+                context.run_migrations()
 
 
 if context.is_offline_mode():

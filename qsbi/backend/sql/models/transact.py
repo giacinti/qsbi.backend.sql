@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship, backref
 
 from .base import Base
 
-class Transact(Base):
+class Transact(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     account_id = Column(Integer, ForeignKey("account.id"))
     transaction_date = Column(DateTime)

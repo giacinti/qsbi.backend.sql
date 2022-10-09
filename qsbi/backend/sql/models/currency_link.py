@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 from .base import Base
 
 
-class CurrencyLink(Base):
+class CurrencyLink(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     cur1_id = Column(Integer, ForeignKey("currency.id"))
     cur2_id = Column(Integer, ForeignKey("currency.id"))

@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 from .base import Base
 
-class AuditLog(Base):
+class AuditLog(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"))
     date = Column(DateTime)

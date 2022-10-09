@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 from .base import Base
 
-class Bank(Base):
+class Bank(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     name = Column(Text)
     code = Column(Integer)

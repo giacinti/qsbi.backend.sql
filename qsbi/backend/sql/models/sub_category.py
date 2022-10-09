@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 from .base import Base
 
-class SubCategory(Base):
+class SubCategory(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     category_id = Column(Integer, ForeignKey("category.id"), primary_key=True)
     name = Column(Text)
