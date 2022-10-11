@@ -1,10 +1,11 @@
 # coding: utf-8
 import json
 from typing import List
-from sqlalchemy import Column, Float, Integer, Text, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, Text
 from sqlalchemy.orm import relationship
 
 from .base import Base
+
 
 class User(Base):  # type: ignore
     id = Column(Integer, primary_key=True)

@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship, backref
 
 from .base import Base
 
+
 class Transact(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     account_id = Column(Integer, ForeignKey("account.id"))
@@ -33,5 +34,3 @@ class Transact(Base):  # type: ignore
     log = relationship("AuditLog", back_populates="transacts")
 
     subs = relationship("Transact", backref=backref('master', remote_side=[id]))
-    
-

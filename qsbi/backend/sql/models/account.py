@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 
 from .base import Base
 
+
 class Account(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     name = Column(Text)
@@ -26,7 +27,7 @@ class Account(Base):  # type: ignore
     bank = relationship("Bank", back_populates="accounts")
     currency = relationship("Currency", back_populates="accounts")
     type = relationship("AccountType", back_populates="accounts")
-    
+
     reconciles = relationship("Reconcile", back_populates="account")
     schedules = relationship("Scheduled", back_populates="account")
     transacts = relationship("Transact", back_populates="account")

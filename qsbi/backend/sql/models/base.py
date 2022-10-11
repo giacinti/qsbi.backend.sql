@@ -16,7 +16,7 @@ class Base(object):
     # convenient function to convert to dict
     def as_dict(self) -> t.Dict:
         return {c.key: getattr(self, c.key)
-            for c in inspect(self).mapper.column_attrs}
+                for c in inspect(self).mapper.column_attrs}
 
     # required in order to access columns with server defaults
     # or SQL expression defaults, subsequent to a flush, without

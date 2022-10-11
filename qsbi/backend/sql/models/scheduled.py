@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship, backref
 
 from .base import Base
 
+
 class Scheduled(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     account_id = Column(Integer, ForeignKey("account.id"))
@@ -30,5 +31,5 @@ class Scheduled(Base):  # type: ignore
     payment = relationship("Payment")
 #    master = relationship("Scheduled")
     log = relationship("AuditLog", back_populates="schedules")
-    
+
     subs = relationship("Scheduled", backref=backref('master', remote_side=[id]))

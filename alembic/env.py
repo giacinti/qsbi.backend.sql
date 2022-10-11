@@ -1,10 +1,18 @@
 from logging.config import fileConfig
-from typing import Any, Dict, Mapping, Optional
+from typing import Any, Dict, Optional
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+
+# add your model's MetaData object here
+# for 'autogenerate' support
+# from myapp import mymodel
+# target_metadata = mymodel.Base.metadata
+import qsbi.backend.sql.models.base as qbase
+import qsbi.backend.sql.models  # noqa: F401
+import qsbi.backend.sql.config as qconfig
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -15,15 +23,8 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# add your model's MetaData object here
-# for 'autogenerate' support
-# from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
-import qsbi.backend.sql.models.base as qbase
-import qsbi.backend.sql.models
-import qsbi.backend.sql.config as qconfig
-
 target_metadata = qbase.Base.metadata  # type: ignore
+
 
 def get_url() -> str:
     return qconfig.settings.QSBI_DB_URL
@@ -46,7 +47,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    #url = config.get_main_option("sqlalchemy.url")
+    # url = config.get_main_option("sqlalchemy.url")
     url: str = get_url()
     context.configure(
         url=url,
@@ -66,11 +67,11 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    configuration: Optional[Mapping[str, Any]] = config.get_section(config.config_ini_section)
+    configuration: Optional[Dict[str, Any]] = config.get_section(config.config_ini_section)
     if configuration:
         configuration["sqlalchemy.url"] = get_url()
         connectable = engine_from_config(
-            #config.get_section(config.config_ini_section),
+            # config.get_section(config.config_ini_section),
             configuration,
             prefix="sqlalchemy.",
             poolclass=pool.NullPool,

@@ -1,3 +1,5 @@
+# flake8: noqa: F401
+from .base import Base
 from .account import Account
 from .account_type import AccountType
 from .audit_log import AuditLog
@@ -14,4 +16,3 @@ from .reconcile import Reconcile
 from .scheduled import Scheduled
 from .transact import Transact
 from .user import User
-

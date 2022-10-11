@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 
 from .base import Base
 
+
 class Reconcile(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
     name = Column(Text)

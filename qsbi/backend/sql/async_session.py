@@ -5,7 +5,7 @@ import qsbi.backend.sql.config as config
 
 engine: AsyncEngine = create_async_engine(
     config.settings.QSBI_DB_URL_ASYNC,
-#    echo=True
+    # echo=True
 )
 
 # expire_on_commit=False will prevent attributes from being expired

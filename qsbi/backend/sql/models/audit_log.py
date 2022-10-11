@@ -1,8 +1,9 @@
 # coding: utf-8
-from sqlalchemy import Column, Float, Integer, Text, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, Text, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 
 from .base import Base
+
 
 class AuditLog(Base):  # type: ignore
     id = Column(Integer, primary_key=True)
@@ -11,7 +12,7 @@ class AuditLog(Base):  # type: ignore
     notes = Column(Text)
 
     user = relationship("User", back_populates="logs")
-    
+
     reconciles = relationship("Reconcile", back_populates="log")
     currency_links = relationship("CurrencyLink", back_populates="log")
     transacts = relationship("Transact", back_populates="log")
